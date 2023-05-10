@@ -14,6 +14,6 @@ def request_api_data(query_char):
 
 def pwned_api_data(password):
     # check password if it exists in API response
-    sha1password = hashlib
-
+    sha1password = (hashlib.sha1(password.encode('utf-8')).hexdigest().upper())
+    return sha1password
 request_api_data('123')
