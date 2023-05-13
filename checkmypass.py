@@ -10,10 +10,21 @@ def request_api_data(query_char):
         raise RuntimeError(f'Error fetching: {res.status_code}, check the api and try again')
     return res
 
+
+
+def get_password_leaks_count(hashes, hash_to_check):
+    hashes = (line.split(':') for line in hashes.text)
+    for h, in hashes:
+        print(h, count)
+
     
 
 def pwned_api_data(password):
     # check password if it exists in API response
     sha1password = (hashlib.sha1(password.encode('utf-8')).hexdigest().upper())
-    return sha1password
-request_api_data('123')
+    first5_char, tail = sha1password[:5], sha1password[5:]
+    response = request_api_data(first5_char)
+    print(response)
+    return get_password_leaks_count(response, tail)
+
+pwned_api_data('123')
